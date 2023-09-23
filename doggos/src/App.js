@@ -3,8 +3,8 @@ import axios from 'axios';
 
 const fetchDogs = (breed) => {
     return axios.get(`https://dog.ceo/api/breed/${breed}/images`)
-        .then( res => {res})
-        .catch( err => {console.log(err)})
+        .then( res => res)
+        .catch( err => console.log(`noooo`))
 }
 
 class App extends React.Component {
@@ -15,16 +15,25 @@ class App extends React.Component {
             doggos: [],
             breed: 'husky' 
         }
-        console.log(fetchDogs('husky'))
     }
 
-
+    componentDidMount() {
+        console.log(`component did mount`)
+        fetchDogs(this.state.breed)
+            .then(res => {
+                this.setState({doggos: res.data.message})
+            })
+    }
 
     render() {
-        console.log(`render function run`)
+        console.log(`render function run`);
         return (
-              
-                <h1>App</h1>
+
+                 <div>
+                {this.state.doggos.map((dog, index) => (
+                    <img width='200' src={dog} key={index} alt={dog} />
+                ))}
+                  </div>
                    
         )
     
