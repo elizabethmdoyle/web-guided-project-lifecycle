@@ -1,6 +1,6 @@
 import React from 'react';
 import axios from 'axios';
-
+import SearchForm from "./SearchForm"
 
 //axios call
 const fetchDogs = (breed) => {
@@ -44,7 +44,7 @@ class App extends React.Component {
 
     //searchDogs is a  method
     //will be passed to the searchform component and will render dogs
-    searchDogs = dogName => {
+    searchDogs = (dogName) => {
         console.log(`search dogs`)
         fetchDogs(dogName).then( res => {
             this.setState({doggos: res.data.message, breed: dogName})
@@ -55,11 +55,14 @@ class App extends React.Component {
     render() {
         console.log(`render function run`);
         return (
-
+             <div>
+                <h1>My App</h1>
+                <SearchForm searchDogs={this.searchDogs}/>
                  <div>
                 {this.state.doggos.map((dog, index) => (
                     <img width='200' src={dog} key={index} alt={dog} />
                 ))}
+                  </div>
                   </div>
                    
         )
