@@ -8,17 +8,23 @@ class SearchForm extends React.Component {
         }
     }
 
-    // handleChange = (e) => {
-    //     e.preventDefault()
-    //     this.setState({inputValue: e.target.value})
-    // }
+    handleChange = (e) => {
+        this.setState({inputValue: e.target.value})
+    }
+
+    handleSubmit = (e) => {
+        e.preventDefault();
+        this.props.searchDogs(this.state.inputValue)
+        this.setState({inputValue: ''})
+    }
 
 
     render() {
         return (
             <div>Form
-                <form>
-                    <input type="text" placeholder="breed" value={this.state.inputValue} onChange={(e) => this.setState({inputValue: e.target.value})} />
+                <form onSubmit={this.handleSubmit}>
+                    {/* <input type="text" placeholder="breed" value={this.state.inputValue} onChange={(e) => this.setState({inputValue: e.target.value})} /> */}
+                    <input type="text" placeholder="breed" onChange={this.handleChange}value={this.state.inputValue} />
                     <button onClick={this.props.searchDogs(this.state.inputValue)}>Search Dogs</button>
                 </form>
             </div>

@@ -39,14 +39,24 @@ class App extends React.Component {
     componentDidUpdate(prevProps, prevState) {
         console.log('component did update')
         console.log(prevState)
+        console.log(this.state)
+
+    if(prevState.doggos !== this.state.doggos) {
+        console.log(`the dogs have changed`);
+            if(this.state.breed === 'chihuahua') {
+                console.log('ewww its a chihuahua');
+                fetchDogs('husky')
+                .then(res => this.state({doggos: res.data.message, breed: 'husky'}))
+            }
+    } 
 
     }
 
     //searchDogs is a  method
     //will be passed to the searchform component and will render dogs
-    searchDogs = (dogName) => {
+    searchDogs = dogName => {
         console.log(`search dogs`)
-        fetchDogs(dogName).then( res => {
+        fetchDogs(dogName).then(res => {
             this.setState({doggos: res.data.message, breed: dogName})
         })
 
