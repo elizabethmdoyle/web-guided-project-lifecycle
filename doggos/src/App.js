@@ -6,7 +6,7 @@ import SearchForm from "./SearchForm"
 const fetchDogs = (breed) => {
     return axios.get(`https://dog.ceo/api/breed/${breed}/images`)
         .then( res => res)
-        .catch( err => console.log(`noooo`))
+        .catch( err => console.log(err, `noooo`))
 }
 
 class App extends React.Component {
